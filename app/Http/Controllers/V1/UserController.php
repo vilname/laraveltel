@@ -56,15 +56,7 @@ class UserController extends Controller
     public function register(Request $request): JsonResponse
     {
         $action = new RegisterAction();
-        $user = $action->execute($request);
-
-        return response()->json([
-            'status' => 'success',
-            'status_code' => 200,
-            'data' => [
-                'user_id' => $user->id
-            ]
-        ]);
+        return response()->json($action->execute($request));
     }
 
     public function auth(Request $request): JsonResponse

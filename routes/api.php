@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\V1\EquipmentController;
+use App\Http\Controllers\V1\TypeEquipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,12 @@ use App\Http\Controllers\V1\EquipmentController;
 
 Route::post('register', [UserController::class, 'register'])->name('register');
 Route::post('auth', [UserController::class, 'auth'])->name('auth');
-Route::post('equipment', [EquipmentController::class, 'store'])->name('equipment_store');
-Route::get('equipment/{code}', [EquipmentController::class, 'show'])->name('equipment_show');
-Route::put('equipment/{code}', [EquipmentController::class, 'update'])->name('equipment_update');
+
+Route::middleware(['auth:api'])->group(function() {
+    Route::post('equipment', [EquipmentController::class, 'store'])->name('equipment_store');
+    Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment_index');
+    Route::get('equipment/{code}', [EquipmentController::class, 'show'])->name('equipment_show');
+    Route::put('equipment/{code}', [EquipmentController::class, 'update'])->name('equipment_update');
+
+    Route::get('equipment', [TypeEquipmentController::class, 'index'])->name('equipment_index');
+});

@@ -4,12 +4,12 @@ namespace App\Models\Equipment\Dto;
 
 use App\Models\Interfaces\DtoInterface;
 
-class UpdateDto implements DtoInterface
+class EquipmentDto implements DtoInterface
 {
-    public $code;
-    public $codeType;
-    public $serialNumber;
-    public $note;
+    public ?string $code;
+    public ?string $codeType;
+    public ?string $serialNumber;
+    public ?string $note;
 
     public static function map(array $data): DtoInterface
     {

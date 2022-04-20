@@ -4,65 +4,90 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Equipment\Actions\DestroyAction;
+use App\Models\Equipment\Actions\IndexAction;
 use App\Models\Equipment\Actions\ShowAction;
 use App\Models\Equipment\Actions\StoreAction;
 use App\Models\Equipment\Actions\UpdateAction;
 use App\Models\Equipment\Dto\DestroyDto;
 use App\Models\Equipment\Dto\ShowDto;
 use App\Models\Equipment\Dto\StoreDto;
-use App\Models\Equipment\Dto\UpdateDto;
+use App\Models\Equipment\Dto\EquipmentDto;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Получение все данных
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $action = new IndexAction();
+        $result = $action->execute(EquipmentDto::map($request->all()));
+
+        return response()->json($result);
     }
 
-
-    public function create(Request $request)
-    {
-
-    }
-
-    public function store(Request $request)
+    /**
+     * Сохранение
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         $action = new StoreAction();
-        return $action->execute(StoreDto::map($request->json()));
+        $result = $action->execute(StoreDto::map($request->json()));
+
+        return response()->json($result);
     }
 
-
-    public function show($code)
+    /**
+     * Получение одного элемента
+     *
+     * @param $code
+     * @return JsonResponse
+     */
+    public function show($code): JsonResponse
     {
         $action = new ShowAction();
-        return $action->execute(ShowDto::map($code));
+        $result = $action->execute(ShowDto::map($code));
+
+        return response()->json($result);
     }
 
-
-    public function edit($id)
-    {
-
-    }
-
-
-    public function update(Request $request, $code)
+    /**
+     * Изменение
+     *
+     * @param Request $request
+     * @param $code
+     * @return JsonResponse
+     */
+    public function update(Request $request, $code): JsonResponse
     {
         $action = new UpdateAction();
-        return $action->execute(UpdateDto::map(array_merge([
+        $result = $action->execute(EquipmentDto::map(array_merge([
             $request->all(),
-            $code
+            compact($code)
         ])));
+
+        return response()->json($result);
     }
 
-    public function destroy($id)
+    /**
+     * Удаление
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
     {
         $action = new DestroyAction();
-        return $action->execute(DestroyDto::map($id));
+        $result = $action->execute(DestroyDto::map($id));
+
+        return response()->json($result);
     }
 }

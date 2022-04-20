@@ -2,17 +2,17 @@
 
 namespace App\Models\User\Register;
 
-use App\Models\Interfaces\ApiResult;
+use App\Models\Resource\ErrorResource;
+use App\Models\Resource\SuccessResource;
 use App\Models\User\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class RegisterAction implements ApiResult
+class RegisterAction
 {
     /**
      * @throws \Exception
      */
-    public function execute(Request $request): User
+    public function execute(Request $request)
     {
         try {
             Validate::validate($request);
@@ -20,9 +20,11 @@ class RegisterAction implements ApiResult
             $user = $userRepository->saveUser(RegisterDto::map($request->all()));
 
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            return new ErrorResource(['message' => $e->getMessage()]);
         }
 
-        return $user;
+        return new SuccessResource(['data' =>
+            ['user_id' => $user->id]
+        ]);
     }
 }

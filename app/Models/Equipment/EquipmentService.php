@@ -2,15 +2,15 @@
 
 namespace App\Models\Equipment;
 
-use App\Models\Equipment;
-use App\Models\Equipment\Validators\StoreValidate;
+use App\Models\Interfaces\DtoInterface;
 use App\Models\TypeEquipment\TypeEquipmentRepository;
-use Illuminate\Http\Request;
+use App\Models\Equipment\Dto\EquipmentDto;
+use Illuminate\Database\Eloquent\Builder;
 
 class EquipmentService
 {
     /**
-     * карта возможных вариантов маски
+     * Карта возможных вариантов маски
      *
      * @param $letter
      * @return string
@@ -29,7 +29,7 @@ class EquipmentService
     }
 
     /**
-     * готовая строка для регулярного выражения
+     * Готовая строка для регулярного выражения
      *
      * @param string $codeType
      * @return string
@@ -45,11 +45,46 @@ class EquipmentService
         return $regStr . '/';
     }
 
+    /**
+     * Отдает по маске строку регулярного выражения
+     *
+     * @param string $codeType
+     * @return string
+     */
     public function getRegExpMask(string $codeType): string
     {
         $typeEquipmentRepository = new TypeEquipmentRepository();
 
         $typeEquipment = $typeEquipmentRepository->getByEquipmentType($codeType);
         return $this->createMapRegExp($typeEquipment->first()->serial_number_mask);
+    }
+
+    /**
+     * Расширяю фильтра запроса к базе
+     *
+     * @param Builder $query
+     * @param DtoInterface $dto
+     * @return Builder
+     */
+    public function scopeEquipment(Builder $query, DtoInterface $dto): Builder
+    {
+        /** @var EquipmentDto $dto */
+        if ($dto->code) {
+            $query->where('code', $dto->code);
+        }
+
+        if ($dto->codeType) {
+            $query->where('code_type', $dto->codeType);
+        }
+
+        if ($dto->serialNumber) {
+            $query->where('serial_number', $dto->serialNumber);
+        }
+
+        if ($dto->note) {
+            $query->where('serial_number', 'like', "%$dto->serialNumber%");
+        }
+
+        return $query;
     }
 }

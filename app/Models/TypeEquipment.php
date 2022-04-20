@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TypeEquipment extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'code';
+    public $timestamps = false;
 }

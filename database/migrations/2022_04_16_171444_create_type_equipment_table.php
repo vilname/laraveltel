@@ -14,8 +14,9 @@ class CreateTypeEquipmentTable extends Migration
     public function up()
     {
         Schema::create('type_equipment', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->string('code');
+            $table->string('type');
+            $table->string('serial_number_mask');
         });
     }
 

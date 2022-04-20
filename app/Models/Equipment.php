@@ -10,11 +10,14 @@ class Equipment extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'serial_number';
+    public $timestamps = false;
+
     /**
      * Get the comments for the blog post.
      */
     public function equipment(): HasMany
     {
-        return $this->hasMany('App\Models\TypeEquipment');
+        return $this->hasMany('App\Models\TypeEquipment', 'code', 'code_type');
     }
 }

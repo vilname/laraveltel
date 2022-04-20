@@ -55,8 +55,8 @@ class UserController extends Controller
      */
     public function register(Request $request): JsonResponse
     {
-        $handler = new RegisterAction();
-        $user = $handler->execute($request);
+        $action = new RegisterAction();
+        $user = $action->execute($request);
 
         return response()->json([
             'status' => 'success',

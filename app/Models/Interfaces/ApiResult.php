@@ -8,5 +8,5 @@ use Illuminate\Http\Request;
 
 interface ApiResult
 {
-    public function execute(Request $request);
+    public function execute(DtoInterface $dto);
 }

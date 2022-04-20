@@ -18,6 +18,7 @@ class RegisterAction implements ApiResult
             Validate::validate($request);
             $userRepository = new UserRepository();
             $user = $userRepository->saveUser(RegisterDto::map($request->all()));
+
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

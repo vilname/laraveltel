@@ -9,7 +9,7 @@ class Validate
     public static function validate(Request $request): array
     {
         return $request->validate([
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email'],
             'name' => ['required'],
             'password' => ['required'],
         ]);

@@ -18,6 +18,6 @@ class Equipment extends Model
      */
     public function equipment(): HasMany
     {
-        return $this->hasMany('App\Models\TypeEquipment', 'code', 'code_type');
+        return $this->hasMany('App\Models\EquipmentType', 'code', 'code_type');
     }
 }

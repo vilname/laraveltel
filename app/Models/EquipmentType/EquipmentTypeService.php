@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\TypeEquipment;
+namespace App\Models\EquipmentType;
 
 use App\Models\Interfaces\DtoInterface;
-use App\Models\TypeEquipment\Dto\TypeEquipmentDto;
+use App\Models\EquipmentType\Dto\EquipmentTypeDto;
 use Illuminate\Database\Eloquent\Builder;
 
-class TypeEquipmentService
+class EquipmentTypeService
 {
     /**
      * Расширяю фильтра запроса к базе
@@ -17,7 +17,7 @@ class TypeEquipmentService
      */
     public function scopeEquipment(Builder $query, DtoInterface $dto): Builder
     {
-        /** @var TypeEquipmentDto $dto */
+        /** @var EquipmentTypeDto $dto */
         if ($dto->code) {
             $query->where('code', $dto->code);
         }

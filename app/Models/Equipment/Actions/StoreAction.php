@@ -10,7 +10,6 @@ use App\Models\Interfaces\ApiResult;
 use App\Models\Interfaces\DtoInterface;
 use App\Models\Resource\ErrorResource;
 use App\Models\Resource\SuccessResource;
-use App\Models\TypeEquipment\TypeEquipmentRepository;
 
 class StoreAction implements ApiResult
 {

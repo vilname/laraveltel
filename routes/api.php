@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\EquipmentController;
-use App\Http\Controllers\v1\TypeEquipmentController;
+use App\Http\Controllers\v1\EquipmentTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +29,5 @@ Route::middleware(['auth:api'])->group(function() {
     Route::get('equipment/{code}', [EquipmentController::class, 'show'])->name('equipment_show');
     Route::put('equipment/{code}', [EquipmentController::class, 'update'])->name('equipment_update');
 
-    Route::get('equipment', [TypeEquipmentController::class, 'index'])->name('equipment_index');
+    Route::get('equipment_type', [EquipmentTypeController::class, 'index'])->name('equipment_index');
 });

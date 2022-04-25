@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models\TypeEquipment\Actions;
+namespace App\Models\EquipmentType\Actions;
 
 use App\Models\Interfaces\ApiResult;
 use App\Models\Interfaces\DtoInterface;
 use App\Models\Resource\ErrorResource;
 use App\Models\Resource\SuccessResource;
-use App\Models\TypeEquipment;
-use App\Models\TypeEquipment\TypeEquipmentService;
+use App\Models\EquipmentType;
+use App\Models\EquipmentType\EquipmentTypeService;
 
 class IndexAction implements ApiResult
 {
     public function execute(DtoInterface $dto)
     {
         try {
-            $query = TypeEquipment::query();
-            $typeEquipmentService = new TypeEquipmentService();
-            $equipmentResult = $typeEquipmentService->scopeEquipment($query, $dto)->paginate(5);
+            $query = EquipmentType::query();
+            $equipmentTypeService = new EquipmentTypeService();
+            $equipmentResult = $equipmentTypeService->scopeEquipment($query, $dto)->paginate(5);
         } catch (\Exception $e) {
             return new ErrorResource(['message' => 'Ошибка получения данных']);
         }

@@ -3,7 +3,7 @@
 namespace App\Models\Equipment;
 
 use App\Models\Interfaces\DtoInterface;
-use App\Models\TypeEquipment\TypeEquipmentRepository;
+use App\Models\EquipmentType\EquipmentTypeRepository;
 use App\Models\Equipment\Dto\EquipmentDto;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -53,10 +53,10 @@ class EquipmentService
      */
     public function getRegExpMask(string $codeType): string
     {
-        $typeEquipmentRepository = new TypeEquipmentRepository();
+        $equipmentTypeRepository = new EquipmentTypeRepository();
 
-        $typeEquipment = $typeEquipmentRepository->getByEquipmentType($codeType);
-        return $this->createMapRegExp($typeEquipment->first()->serial_number_mask);
+        $equipmentType = $equipmentTypeRepository->getByEquipmentType($codeType);
+        return $this->createMapRegExp($equipmentType->first()->serial_number_mask);
     }
 
     /**

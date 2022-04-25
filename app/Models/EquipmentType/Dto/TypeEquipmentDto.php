@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\TypeEquipment\Dto;
+namespace App\Models\EquipmentType\Dto;
 
 use App\Models\Interfaces\DtoInterface;
 
-class TypeEquipmentDto implements DtoInterface
+class EquipmentTypeDto implements DtoInterface
 {
     public string $code;
     public string $type;

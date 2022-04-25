@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\V1\UserController;
-use App\Http\Controllers\V1\EquipmentController;
-use App\Http\Controllers\V1\TypeEquipmentController;
+use App\Http\Controllers\v1\UserController;
+use App\Http\Controllers\v1\EquipmentController;
+use App\Http\Controllers\v1\TypeEquipmentController;
 
 /*
 |--------------------------------------------------------------------------

@@ -10,7 +10,7 @@ class Equipment extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'serial_number';
+    protected $primaryKey = 'code';
     public $timestamps = false;
 
     /**
